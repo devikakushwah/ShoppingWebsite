@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <%- include('../partial/_bootstrap.ejs')%>
+    </head>
+    <body>
+        <div class="cantainer">
+         <div class="form-group">
+            <div class="form-group">
+                <table class="table">
+                    
+                    <thead><td>Category Image</td>
+                        <td>Product Name</td>
+                        <td>Product Price</td>
+                        <td>Product Qty</td>
+                    </thead>
+                <%for(category of categoryList){%>
+                 
+                       <tbody>
+                           <tr><th><img width="100px" height="100px" src="/images/<%=category.frontview%>"/></th>
+                            <th><%= category.pname%></th>
+                            <th><%= category.product_price%></th>
+                            <th><%= category.product_stock%></th>
+                            <!-- <td><img width="100px" height="100px" src="/images/<%=category.category_image%>"/></td>
+                            <td> -->
+                        </tr>
+                          
+                        
+                           </tbody>
+                   </table>  
+                  <%}%>
+                
+                           
+             
+              </div>
+         </div>
+
+
+        </div>
+     
+    </body>
+</html>

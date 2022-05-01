@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Category Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Geek Hardwares</title>
+
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="/css/CustomerCss.css">
+    </head>
+    <body>
+        <%-include("../partial//customer/Navigation.ejs")%>
+        <section class="category" id="category">
+
+            <h1 class="heading">shop by <span>category</span></h1>
+            <%
+                for (var i = 0; i <result.length; i++) 
+                {
+            %>
+    
+                    <div class="box-container">
+                        <div class="box">
+                            <h3><%=result[i].cat_name%></h3>
+                            <p>upto 50% off</p>
+                            <img src="/images/<%=result[i].cat_image%>" alt="">
+                            <a href="/category/shopnow/<%=result[i].id%>" class="btn">shop now</a>
+                        </div>
+                    </div>
+            <%
+                }
+            %>
+    
+        </section>
+        <%-include("../partial//customer/Footer.ejs")%>
+    </body>
+    <script src="js/Customer.js"></script>
+</html>

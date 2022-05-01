@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+      <style>
+          .banner{
+              box-shadow: 1px 1px 0px 1px;
+              margin-top:200px;
+              margin-left:350px;
+          }
+      </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-5 banner">
+            <form action="/category/add-category" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <h1>Add Category</h1>
+                </div><hr/>
+              <div class="form-group">
+            
+                    <label>Category Name</label>
+                    <input type="text" name="cname" class="form-control"/>
+                </div>
+               
+            <div class="form-group">
+                <label>Upload(Image)</label>
+                <br><input type="file" name="images" multiple/>
+            </div>
+            <div class="group">
+                <button class="btn btn-primary from-control" type="submit">Add</button>
+            </div>
+            </form>
+          </div>
+    </div>
+    </div>
+            </div>
+    </body>
+</html>

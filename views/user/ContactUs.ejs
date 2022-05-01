@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <title>Contact Us</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .heading{
+  text-align: center;
+  color:var(--black);
+  text-transform: uppercase;
+  padding:1rem;
+  font-size: 3.5rem;
+  padding-bottom: 2rem;
+}
+.banner{
+              box-shadow: 1px 1px 1px 1px;
+              margin-top:20px;
+              margin-left:150px;
+              width: 500px;;
+          }
+          .inputBox{
+            padding:10px;
+          }
+          label{
+              padding:10px;
+              margin-top:10px;
+          }
+          input{
+              margin-top:20px;
+              margin-bottom:10px;
+              padding:10px;
+              width:100%;
+          }
+.heading span{
+  color:var(--myred);
+  text-transform: uppercase;
+}
+
+
+</style>
+<body>
+
+    <%-include("../partial/_navigation.ejs")%>
+
+        
+        
+            <h1 class="heading"> <span>Contact</span> Us </h1>
+
+          <div class="inputBox">
+            <div class="row">
+                <div class="col-5 banner">
+            <form action="/query/add-query" method="POST">
+                <div class="form-group">
+                   
+                </div><hr/>
+              <div class="form-group">
+            
+                    <label>Name</label>
+                    <input type="text" name="name" class=""/>
+                </div>
+               
+            <div class="form-group">
+                <label>Email</label>
+                <br><input type="email" name="email"/>
+            </div>
+            <div class="form-group">
+                <label>Mobile</label>
+                <br> <input type="text" placeholder="mobile" name="mobile">
+            </div>
+            <div class="form-group">
+                <label>Subject</label>
+                <br><input type="text" placeholder="subject" name="subject">
+            </div>
+            <div class="form-group">
+                <label>Query</label>
+                <br><textarea style="width: 500px;height:100px;" placeholder="message" class="form-control" id=""  name="description"></textarea>
+
+            </div>
+            
+            
+            
+            <div class="group">
+                <button class="btn btn-primary from-control" type="submit">Add</button>
+            </div>
+            </form>
+          </div>
+    </div>
+    </div>
+            </div>
+
+        <%-include("../partial/_footer.ejs")%>
+</body>
+
+</html>>

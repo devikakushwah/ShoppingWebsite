@@ -1,0 +1,224 @@
+<html>
+    <head>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            .banner{
+                margin:10px;
+                padding:10px;
+            
+               box-shadow: 1px 1px 1px 1px;
+            }
+            .manage{
+                margin-top: 50px;
+            }
+           .container {
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      text-align: center;
+    }
+    .button{
+      background:#fff;
+    
+      font-weight:bolder;
+      text-transform: uppercase;
+      font-size:18px;
+      border-radius: 5px;
+      margin-top:38px;
+      transition: 0.4s;
+
+    }
+    .button:hover{
+      
+      color:#fff;
+    }
+    .popup{
+      /* background:rgb(0,0,0,0.6); */
+      width:1%;
+      height:0%;
+      position:absolute;
+      display:none;
+     
+    }
+    .popup-content{
+    
+      margin-left: 500px;
+      height:auto;
+      width:700px;
+ background:#fff;
+  padding:24px;
+  position:relative;
+  border-radius:5px;
+    }
+    .close{
+      position:absolute;
+      top:-15px;
+      right:-15px;
+      background:#fff;
+      height:20px;
+      width:20px;
+      border-radius:50%;
+    }
+    @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Signika:400,700|Courgette);
+  .container .header{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+  }
+  .container .header::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #fff, #fff);
+  }
+  form .button input{
+    /* height: 100%; */
+    width: 50%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(#ff523b);
+  }
+  form .button input:hover{
+   background: linear-gradient(#ff523b);
+   }
+   section {
+    margin: 0em auto 0;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  input {
+      display: block;
+      margin: .5em auto 0em;
+      padding: 0.5em 1em 0.5em 0.7em;
+      width: 100%;
+      border: none;
+      
+   
+      font-size: 2em;
+      line-height: 0;
+      transition: all .3s linear;
+  } 
+        </style>
+    </head>
+ <body>
+     <div class="container">
+        <div class="row manage">
+          
+             <div class="col-md-4 banner">
+        <form action="/user/login" method="post">
+            <div class="content">
+                <h2 class="header">Login Form</h2>
+
+               
+                <div class="email">
+                    <label>Email Address</label>
+                    <input onkeyup="validateEmail()" type="email" id="email" spellcheck="false" data-ms-editor="false"
+                        name="email" placeholder="Email Address" autocomplete="off" class="form-control" required>
+                    <small id="emailError"></small>
+                </div>
+
+
+                <div class="password">
+                    <label for="password">Enter password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" class="form-control"
+                        required>
+                    <small id="showHidePass" onclick="showPassword()" class="text-primary">Show password</small>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Register" onclick="return validateData()" class="btn btn-primary form-control">
+                </div>
+                <div>
+                  <a href="/user/create-account">Create an Account</a>
+                </div>
+                <div>
+                  <a href="#">Forgot Password</a>
+                </div>
+               
+            </div>
+
+        </form>
+    </div>
+    </div>
+</div>   </div>
+
+<div class="modal" id="forgetPassword">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Address Information</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="/user/forgot-password" method="post">
+        <div class="form-group">
+            <label>Your Email</label>
+           <input type="email" name="email" class="form-control"/>
+        </div>
+        <div class="form-group">
+         
+            <input  type="submit" value="Opt send" class="form-control"/>
+    
+        </div>
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div> 
+
+<script>
+        function validateEmail() {
+    var status = true;
+    var regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    var email = document.getElementById("email").value;
+    var emailError = document.getElementById("emailError");
+    if (email == "") {
+        status = false;
+        emailError.innerHTML = "";
+    }
+    else if (!regex.test(email)) {
+        status = false;
+        emailError.innerHTML = "Invalid email id";
+        emailError.style.color = "red";
+    }
+    else
+        emailError.innerHTML = "";
+    return status;
+}
+function showPassword() {
+    var showHidePass = document.getElementById("showHidePass");
+    var passwordObj = document.getElementById("password");
+
+    if (showHidePass.textContent == "Show password") {
+        passwordObj.type = "text";
+        showHidePass.innerHTML = "Hide password";
+    }
+    else {
+        passwordObj.type = "password";
+        showHidePass.innerHTML = "Show password";
+    }
+}
+
+    </script>
+
+ </body>
+
+    </html>

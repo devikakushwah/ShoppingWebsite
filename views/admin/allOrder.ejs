@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>All-Customer</title>
+        <%- include("../partial/Bootstrap.ejs")%>
+    </head>
+
+    <body>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ORDERID</th>
+            <th scope="col">ADDRESS</th>
+            <th scope="col">MOBILE</th>
+            <th scope="col">DATE</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">SUM</th>
+            <th scope="col">QTY</th>
+            <th scope="col">PRODUCTNAME</th>
+            <th scope="col">PRICE</th>
+          </tr>
+        </thead>
+        <tbody>
+            <%
+                for(var i=0; i<result.length; i++)
+                {
+            %>
+                    <tr>
+                        <td><%=result[i].orderId%></td>
+                        <td><%=result[i].address%></td>
+                        <td><%=result[i].mobile%></td>
+                        <td><%=result[i].date%></td>
+                        <td><%=result[i].email%></td>
+                        <td><%=result[i].sum%></td>
+                        <td><%=result[i].qty%></td>
+                        <td><%=result[i].productName%></td>
+                        <td><%=result[i].price%></td>
+                    </tr>
+            <%
+                }
+            %>
+        </tbody>
+      </table>
+
+      
+
+      <nav class="navbar">
+        <a href="/">BACK</a>
+    </nav>
+    </body>
+</html>

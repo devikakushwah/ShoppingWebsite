@@ -1,0 +1,74 @@
+create database toyHouse;
+
+use toyHouse;
+
+create table user(
+	id int auto_increment primary key,
+	name varchar(100),
+	email varchar(100),
+	password varchar(10)
+);
+
+insert into user (name,email,password) 
+values('palash sharma','palash@gmail.com','palash123');
+
+ insert into register(user_id, address, mobile, date) 
+ values(1,'alapura','989989898','2001-06-02');
+
+create table register(
+	id int auto_increment primary key,
+	user_id int,
+	address varchar(150),
+	mobile varchar(10),
+	date date,
+	foreign key (user_id) references user(id)
+);
+
+ select user.name,user.email,register.address,
+ register.mobile,register.date 
+ from user inner join register on 
+ user.id=register.user_id;
+
+create table favourite(
+	id int auto_increment primary key,
+	user_id int,
+	product_id int ,foreign key (user_id) references user(id),
+	 foreign key(product_id) references product(id)
+);
+
+create table product(id int auto_increment primary key,
+		pname varchar(255),
+        category_id int ,
+		product_price double,
+		product_stock int,
+		imageurl varchar(1000),
+		description varchar(266),
+		date date,
+		isdeleted varchar(1),
+        foreign key (category_id) references category(id)
+);
+create table category(
+	 id int auto_increment primary key,
+	 category_name varchar(255));
+	 
+	 
+	 create table query(
+	  id int auto_increment primary key,
+	  user_id int ,
+	  query_box varchar(500)
+	 );
+	 
+	 create table comment(
+	  id int auto_increment primary key,
+	  name varchar(255),
+	  mobile varchar(10),
+	  email varchar(500),
+	  comment_box varchar(500)
+	  
+	 );
+	 
+	 create table admin(
+	  id int auto_increment primary key,
+	  email varchar(255),
+	  password varchar(10)
+	 );

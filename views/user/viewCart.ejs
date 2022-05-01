@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <%-include('../partial/_bootstrap.ejs')%>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel ="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="http://fonts.googleapis.com/css2?family=Poppins:wght@300;
+    400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body>
+<script>
+ 
+</script>    
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+         <table class="table">
+           <tr>
+               <th>Image</th>
+               <th>Product-Info</th>
+               <th>Price</th>
+               <th>Quantity</th>
+               <th>Total</th>
+               <th>Remove</th>
+           </tr>
+           <tbody>
+               <%for(index=0; index < cartItemList.length; index++){%>
+                <tr>
+                    <td><img width="100px" height="100px" src="/images/<%=cartItemList[index].frontview%>"/></td>
+                    <td>
+                        <b>Name :</b> <%=cartItemList[index].pname%>
+                        <br><b>Desc :</b> <%=cartItemList[index].description%>
+                        <br><b>In stock :</b> <%=cartItemList[index].product_stock%>
+                    </td>
+                    <td><%=cartItemList[index].product_price%></td>
+                    <td>
+                        <input onchange="updateQty(this.value,'<%=cartItemList[index].product_price%>','<%=index%>')" style="width:60px;" type="number" min="1" max="<%=cartItemList[index].product_stock%>"/>
+                    </td>
+                    <td><span id="total<%=index%>"></span></td>
+                    <td>
+                        <button onclick='removeItem("<%=cartItemList[index].id%>")' class="btn btn-danger">Remove</button>
+                    </td>
+                </tr> 
+               <%}%> 
+           </tbody>
+         </table>
+         <div class="row justify-content-center p-5">
+             <button data-toggle="modal" data-target="#place-order" data-ms-editor=class="btn btn-primary">Place Order</button>
+         </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="place-order">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Address Information</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+          <div class="form-group">
+              <label>Address</label>
+              <textarea id="address" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+              <label>Contact Number</label>
+              <input type="text" id="contact" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" class="form-control"/>
+        </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button onclick="placeOrder()" type="button" class="btn btn-success">CheckOut</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+<script>
+    function placeOrder(){
+
+       var address = document.getElementById("address").value;
+       var contact = document.getElementById("contact").value; 
+       var email = document.getElementById("email").value;
+       var itemList =  localStorage.getItem("item-list");
+       
+       $.ajax({
+         url: "/order/place-order/"+address+"/"+contact+"/"+itemList+"/"+email,
+           success : function(result){
+               alert("Order Placed......");
+               }
+       });
+    }
+    function updateQty(qty,price,index){
+      var spanObj = document.getElementById("total"+index);
+      var total = (qty*1) * (price*1);
+      spanObj.innerHTML = ""+total;
+      itemList = localStorage.getItem("item-list");
+      itemList = JSON.parse(itemList);
+      itemList[index].productQty = qty*1;
+      localStorage.setItem("item-list",JSON.stringify(itemList));
+    }
+    function getCartItem(){
+      $.ajax({
+          url: '/cart/get-cart-item-local',
+          success: function(result){
+            for(index=0; index< result.length; index++)
+              result[index].productQty = 1;
+            localStorage.setItem("item-list",JSON.stringify(result));
+          }
+      });
+    }
+    getCartItem();
+    function removeItem(pid){
+      $.ajax({
+        url:'/cart/remove-product/'+pid,
+        success: function(result){
+          alert("remove successfully");
+        }
+      })
+    }
+</script>
+</body>
+</html>

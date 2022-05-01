@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <%- include('../partial/_bootstrap.ejs')%>
+    </head>
+    <body>
+        <div class="cantainer">
+
+            <section class="product" id="product">
+
+                <h1 class="heading">All <span>Product</span></h1>
+        
+                <div class="box-container">
+        
+                    <%
+                        for(var i=0; i<result.length; i++)  
+                        {
+                    %>
+                            <div class="box">
+                                <span class="discount">-33%</span>
+                                <div class="icons">
+                                    <a href="/wishlist/addwishlist/<%=result[i].id%>">LIKE</a>
+                                </div>
+                                <img src="/images/<%=result[i].pro_image%>" alt="">
+                                <h3><%=result[i].pname%></h3>
+                                <div class="price"> Rs<%=result[i].product_price%> <span> Rs. <%=result[i].product_price%> </span> </div>
+                                <div class="quantity">
+                                    <span>quantity : </span>
+                                    <input type="number" min="1" max="1000" value="1">
+                                    <span> /pc </span>
+                                </div>
+                                <%if(result[i].id){%>
+                                    <button onclick="check(this,'<%=result[i].id%>','<%=userLogin%>')" class="btn">REMOVE FROM CART</button>
+                                <%}else{%>
+                                    <button onclick="check(this,'<%=result[i].id%>','<%=userLogin%>')" class="btn">ADD TO CART</button>
+                                <%}%>
+                            </div>
+                    <%
+                        }
+                    %>
+        
+                </div>
+            </section>
+        
+        </div>
+       
+    </body>
+</html>
